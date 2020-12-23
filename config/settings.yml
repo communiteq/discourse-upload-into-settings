@@ -1,0 +1,4 @@
+plugins:
+  upload_into_settings_enabled:
+    default: true
+    client: false
