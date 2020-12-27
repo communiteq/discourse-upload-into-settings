@@ -24,7 +24,11 @@ after_initialize do
           end
           value = tmp.path
         end
-        value = UploadCreator.new(File.open(value, 'rb'), filename).create_for(user.id)
+        if value.starts_with?('/uploads/')
+          value = Upload.where(url: value).first
+        else
+          value = UploadCreator.new(File.open(value, 'rb'), filename).create_for(user.id)
+        end
       end
 
       old_set_and_log(name, value, user)
